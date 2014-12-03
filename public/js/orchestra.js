@@ -39,7 +39,9 @@
     $('input[type="date"]').datepicker({
       dateFormat: "yy-mm-dd"
     });
-    $('select.form-control[role!="switcher"], .navbar-form > select[role!="switcher"]').select2().removeClass('form-control');
+    if ($.isFunction($.fn.select2)) {
+      $('select.form-control[role!="switcher"], .navbar-form > select[role!="switcher"]').select2().removeClass('form-control');
+    }
     $('*[role="tooltip"]').tooltip();
     return true;
   };
@@ -78,6 +80,7 @@
     setup_button_group($);
     setup_helper($);
     setup_pagination($);
+    Dispatcher.fire('init.finish');
     return true;
   });
 
